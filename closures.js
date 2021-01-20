@@ -23,7 +23,7 @@ function outer() {
 */
   
 // Code Here
-const inner = 
+const inner = outer()
 
 
 
@@ -32,6 +32,7 @@ const inner =
 //Once you do that, invoke inner.
 
 //Code Here
+inner()
 
 
 
@@ -55,6 +56,10 @@ function callFriend(name) {
 */
 
 //Code Here
+const callJake = callFriend('Jake')
+callJake('435-555-9248')
+
+
 
 
 
@@ -65,15 +70,24 @@ function callFriend(name) {
 */
 
 //Code Here
+function makeCounter(){
+  let count = 0
+    return () => {
+        count += 1
+        return count
+      }
+}
+
+
 
 
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+  let count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -89,18 +103,23 @@ function callFriend(name) {
 */
 
 function counterFactory(value) {
-  // Code here.
-
   return {
-
+    inc: () => {
+      value += 1
+      return value
+    },
+    dec: () => {
+      value -= 1
+      return value
+    }
   };
 }
 
-counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
+let counter = counterFactory(10);
+counter.inc() // 11
+counter.inc() // 12
+counter.inc() // 13
+counter.dec() // 12
 
 
 
@@ -113,7 +132,7 @@ counter = counterFactory(10);
 */
 
 function motivation( firstname, lastname ) {
-  var welcomeText = "You're doing awesome, keep it up";
+  let welcomeText = "You're doing awesome, keep it up";
 
   // code message function here.
 
@@ -146,9 +165,13 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
-    // Code here.
+    publicMethod: () => {
+      privateMethod()
+      return 
+    }
   };
 })();
+module.publicMethod()
 
 
 
@@ -162,10 +185,17 @@ var module = (function() {
 */
 
 function secretNumber() {
-  var secret = 143;
+  let secret = 143;
 
   return {
-    // Code here
+    addToSecret: (addedToSecret) => {
+      secret += addedToSecret
+      return secret
+    },
+    takeAwayFromSecret: (removedFromSecret) => {
+      secret -= removedFromSecret
+      return secret
+    }
   };
 }
 
@@ -190,10 +220,13 @@ function secretNumber() {
 */
 
 function timeOutCounter() {
-  for (var i = 0; i <= 5; i++) {
+  for (let i = 0; i <= 5; i++) {
+    function closure(index){
     setTimeout(function() {
-      console.log(i);
+      console.log(index);
     }, i * 1000);
+    }
+    closure(i)
   }
 }
 timeOutCounter();
